@@ -1,0 +1,47 @@
+# Pré-requisitos: Ter o docker instalado.
+# Criei o container em um SO Windows 10 Home.
+# Para executar os comandos utilizei o terminal Git Bash.
+
+1- Executar os seguintes comandos para criar o container: 
+
+  docker pull mongo
+
+  docker run -d --name mongoDbServer -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=adminpass mongo
+
+  docker-machine ip
+
+2- Após, pegar o ip da docker-machine e a porta exposta no container e conecte via Robo 3T (ou ferramenta GUI que preferir).
+3- Para ver todas as informações da docker-machine que foi inicializada, utilize o comando "docker-machine ls"
+
+4- Com o container no ar, acesse o console sh do mesmo e execute os comandos abaixo para criar a estrutura que vamos utilizar:
+
+  # Acessar terminal container: 
+    winpty docker exec -i -t [ID_CONTAINER] sh
+
+  # Acessar mongo com user e senha:
+    mongo -u mongoadmin -p adminpass
+
+  # Criar o database da aplicação:
+    use pythonDb
+
+  # Criar primeira collection (Opcional. Por padrão o mongoDB cria qunado inserimos o primeiro registro):
+    db.createCollection("pessoas")
+
+  # Criar o usuario de escrita no banco "pythonDb":
+  db.createUser(
+    {
+      user: "pythonUser",
+      pwd: "pythonPass",
+      roles: [
+        { role: "readWrite", db: "pythonDb" }
+      ]
+    }
+  )
+
+5- Se todos os comandos rodaram ok, teremos a base configurada.
+
+
+
+ 
+ 
+ 
