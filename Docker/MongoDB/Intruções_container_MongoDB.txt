@@ -15,8 +15,8 @@
 
 4- Com o container no ar, acesse o console sh do mesmo e execute os comandos abaixo para criar a estrutura que vamos utilizar:
 
-  # Acessar terminal container: 
-    winpty docker exec -i -t [ID_CONTAINER] sh
+  # Acessar terminal do container: 
+    winpty docker exec -i -t mongoDbServer sh
 
   # Acessar mongo com user e senha:
     mongo -u mongoadmin -p adminpass
