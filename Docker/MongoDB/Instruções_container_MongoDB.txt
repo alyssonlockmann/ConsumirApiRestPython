@@ -1,5 +1,3 @@
-# Pré-requisitos: Ter o docker instalado.
-# Criei o container em um SO Windows 10 Home.
 # Para executar os comandos utilizei o terminal Git Bash.
 
 1- Executar os seguintes comandos para criar o container: 
@@ -40,7 +38,6 @@
   )
 
 5- Se todos os comandos rodaram ok, teremos a base configurada.
-
 
 
  
