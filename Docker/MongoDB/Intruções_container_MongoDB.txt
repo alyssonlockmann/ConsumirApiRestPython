@@ -24,9 +24,10 @@
   # Criar o database da aplicação:
     use pythonDb
 
-  # Criar primeira collection (Opcional. Por padrão o mongoDB cria qunado inserimos o primeiro registro):
+  # Criar primeira collection (Opcional. Por padrão o mongoDB cria quando inserimos o primeiro registro):
     db.createCollection("pessoas")
 
+  # Para evitar possíveis erros na nossa base, vamos configurar na nossa aplicação um usuário sem acesso de adm.
   # Criar o usuario de escrita no banco "pythonDb":
   db.createUser(
     {

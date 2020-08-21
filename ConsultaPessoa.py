@@ -1,11 +1,11 @@
 #
-# Consulta a API e insere o registro no mongoDB
+# Consulta uma API que retorna um registro json e insere o dado na base mongoDB
 #
 import requests
 import json
 import pymongo
 from lib import ApiError
-from lib import DbCredentials as db
+from lib import DbFunctions as db
 
 # Requisição
 resp = requests.get('https://randomuser.me/api/')
@@ -13,13 +13,13 @@ resp = requests.get('https://randomuser.me/api/')
 # Testa pra ver se a requisição deu ok.
 # Se deu erro, apresenta a exceção.
 if resp.status_code != 200:
-    raise ApiError.ApiError(' {}'.format(resp.status_code))
+    raise ApiError.ApiError(resp.status_code)
 
 # Pega o request e transforma em json
 # A saída do mesmo é um dicionário.
 jsonIni = resp.json()
 
-# Formatando e exibindo resumo dos dados que serã inseridos na base.
+# Formatando e exibindo resumo dos dados que serão inseridos na base.
 jsonResults = jsonIni['results']
 userDictPrint = 'Nome: {} {} \nFone: {} \nNascimento: {} \nE-mail: {}'.format(jsonResults[0]['name']['first'], jsonResults[0]['name']['last'], jsonResults[0]['phone'], jsonResults[0]['registered']['date'], jsonResults[0]['email'])
 print(userDictPrint)
@@ -33,4 +33,5 @@ userData = {'nome' : jsonResults[0]['name']['first'] + ' ' + jsonResults[0]['nam
         }
 
 # Inserindo o registro na base. Se deu erro, apresenta a exceção tratada.
-db.DbCredentials.mongoInsertOne('pessoas', userData)
+db.DbFunctions.mongoInsertOne('pessoas', userData)
+
