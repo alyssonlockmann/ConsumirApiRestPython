@@ -15,8 +15,8 @@
 
 4- Com o container no ar, acesse o console sh do mesmo e execute os comandos abaixo para criar a estrutura que vamos utilizar:
 
-  # Acessar terminal container: 
-    winpty docker exec -i -t [ID_CONTAINER] sh
+  # Acessar terminal do container: 
+    winpty docker exec -i -t mongoDbServer sh
 
   # Acessar mongo com user e senha:
     mongo -u mongoadmin -p adminpass
@@ -24,9 +24,10 @@
   # Criar o database da aplicação:
     use pythonDb
 
-  # Criar primeira collection (Opcional. Por padrão o mongoDB cria qunado inserimos o primeiro registro):
+  # Criar primeira collection (Opcional. Por padrão o mongoDB cria quando inserimos o primeiro registro):
     db.createCollection("pessoas")
 
+  # Para evitar possíveis erros na nossa base, vamos configurar na nossa aplicação um usuário sem acesso de adm.
   # Criar o usuario de escrita no banco "pythonDb":
   db.createUser(
     {
