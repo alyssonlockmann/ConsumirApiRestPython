@@ -8,9 +8,6 @@ from lib import ApiError
 from lib import DbFunctions as db
 import pandas as pd
 
-# Caminho do arquivo
-PATH = 'Arquivos/input'
-
 # Requisição
 resp = requests.get('http://jsonplaceholder.typicode.com/comments')
 
@@ -24,7 +21,7 @@ if resp.status_code != 200:
 jsonIni = resp.json()
 jsonString = json.dumps(jsonIni)
 
-# Veriifica se o arquivo foi carregado corretamente.
+# Veriifica se os dados foram carregados corretamente.
 try:
     df = pd.read_json(jsonString)
 except Exception as inst:
