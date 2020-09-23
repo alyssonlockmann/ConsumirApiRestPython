@@ -3,7 +3,6 @@
 #
 import requests
 import json
-import pymongo
 from lib import ApiError
 from lib import DbFunctions as db
 
