@@ -42,5 +42,5 @@ dfCmts = dfCmts.to_dict('records')
 df = df.to_dict('records')
 
 # Inserindo registros na base.
-db.DbFunctions.mongoInsertMany('comentarios', dfCmts)
-db.DbFunctions.mongoInsertMany('posts', df)
+db.DbFunctions.mongo_insert_many('comentarios', dfCmts)
+db.DbFunctions.mongo_insert_many('posts', df)

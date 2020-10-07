@@ -14,7 +14,7 @@ class DbFunctions():
     __database = __mongoClient[__DATABASE]
     
     @classmethod
-    def mongoInsertOne(self, collection, data):
+    def mongo_insert_one(self, collection, data):
         ''' Insere um registro unico na base. 
         \nO paramêtro "data" recebe um dicionário('dict')'''
 
@@ -29,7 +29,7 @@ class DbFunctions():
             print(inst.args[0])
 
     @classmethod
-    def mongoInsertMany(self, collection, data):
+    def mongo_insert_many(self, collection, data):
         ''' Insere varios registros na base. 
         \nO paramêtro "data" recebe uma lista('list') '''
 

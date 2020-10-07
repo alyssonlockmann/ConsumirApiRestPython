@@ -32,5 +32,5 @@ userData = {'nome' : jsonResults[0]['name']['first'] + ' ' + jsonResults[0]['nam
         }
 
 # Inserindo o registro na base. Se deu erro, apresenta a exceção tratada.
-db.DbFunctions.mongoInsertOne('pessoas', userData)
+db.DbFunctions.mongo_insert_one('pessoas', userData)
 
