@@ -5,6 +5,7 @@ import requests
 import json
 from lib import ApiError
 from lib import DbFunctions as db
+from datetime import datetime
 
 # Requisição
 resp = requests.get('https://randomuser.me/api/')
@@ -28,9 +29,9 @@ userData = {'nome' : jsonResults[0]['name']['first'] + ' ' + jsonResults[0]['nam
             'fone' : jsonResults[0]['phone'],
             'idade': jsonResults[0]['registered']['age'],
             'email': jsonResults[0]['email'],
-            'pais': jsonResults[0]['location']['country']
+            'pais': jsonResults[0]['location']['country'],
+            'data': datetime.now().strftime('%d/%m/%Y %H:%M:%S')
         }
 
 # Inserindo o registro na base. Se deu erro, apresenta a exceção tratada.
 db.DbFunctions.mongo_insert_one('pessoas', userData)
-

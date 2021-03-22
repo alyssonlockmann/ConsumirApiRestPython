@@ -1,43 +1,14 @@
-# Para executar os comandos utilizei o terminal Git Bash.
+# Para executar os comandos utilizei o terminal Git Bash(Use o de sua preferência).
 
-1- Executar os seguintes comandos para criar o container: 
+1- Executar o seguinte comando para criar o container(Exemplo da execução em 'docker_exec.PNG'): 
+  docker-compose up -d
 
-  docker pull mongo
+2- Execute o comando abaixo e verifique se o conatainer 'mongodb_pythondb' foi criado:
+  docker ps
 
-  docker run -d --name mongoDbServer -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=adminpass mongo
+3- Se o passos 1 e 2 rodaram ok, teremos a base configurada.
 
-  docker-machine ip
-
-2- Após, pegar o ip da docker-machine e a porta exposta no container e conecte via Robo 3T (ou ferramenta GUI que preferir).
-3- Para ver todas as informações da docker-machine que foi inicializada, utilize o comando "docker-machine ls"
-
-4- Com o container no ar, acesse o console sh do mesmo e execute os comandos abaixo para criar a estrutura que vamos utilizar:
-
-  # Acessar terminal do container: 
-    winpty docker exec -i -t mongoDbServer sh
-
-  # Acessar mongo com user e senha:
-    mongo -u mongoadmin -p adminpass
-
-  # Criar o database da aplicação:
-    use pythonDb
-
-  # Criar primeira collection (Opcional. Por padrão o mongoDB cria quando inserimos o primeiro registro):
-    db.createCollection("pessoas")
-
-  # Para evitar possíveis erros na nossa base, vamos configurar na nossa aplicação um usuário sem acesso de adm.
-  # Criar o usuario de escrita no banco "pythonDb":
-  db.createUser(
-    {
-      user: "pythonUser",
-      pwd: "pythonPass",
-      roles: [
-        { role: "readWrite", db: "pythonDb" }
-      ]
-    }
-  )
-
-5- Se todos os comandos rodaram ok, teremos a base configurada.
+4- Utilzei o Robot 3T como ferramenta GUI para conferir a estrutura e dados da base.
 
 
  
