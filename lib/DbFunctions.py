@@ -4,7 +4,7 @@ import pymongo
 class DbFunctions():
     
     # Atributos declarados de forma privada, pois devem ser utilizados apenas dentro da classe.
-    __URLDB = '192.168.99.100:27017'
+    __URLDB = 'localhost:27017'
     __USER = 'pythonUser'
     __PASS = 'pythonPass'
     __DATABASE = 'pythonDb'
