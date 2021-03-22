@@ -6,6 +6,7 @@ import json
 from lib import ApiError
 from lib import DbFunctions as db
 import pandas as pd
+from datetime import datetime
 
 # Requisição
 resp = requests.get('http://jsonplaceholder.typicode.com/comments')
@@ -26,6 +27,9 @@ try:
 except Exception as inst:
     print('*** Erro ao carregar dados de entrada!')
     raise inst
+
+# Adicionado data da consulta.
+df['data'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
 # Cria df de comentários e apresenta resultado. 
 dfCmts = df.drop(['id', 'name', 'email'], axis=1)
