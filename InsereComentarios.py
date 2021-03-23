@@ -31,8 +31,11 @@ except Exception as inst:
 # Adicionado data da consulta.
 df['data'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
+# Renomeando coluna id.
+df = df.rename(columns={'id': 'id_user'})
+
 # Cria df de comentários e apresenta resultado. 
-dfCmts = df.drop(['id', 'name', 'email'], axis=1)
+dfCmts = df.drop(['name', 'email'], axis=1)
 print('Comentários a serem inseridos:')
 print(dfCmts.head(n=5))
 
