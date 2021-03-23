@@ -1,6 +1,6 @@
 # Para executar os comandos utilizei o terminal Git Bash(Use o de sua preferência).
 
-1- Executar o seguinte comando para criar o container(Exemplo da execução em 'docker_exec.PNG'): 
+1- Entrar na pasta "Docker/MongoDB/" e executar o seguinte comando para criar o container(Exemplo da execução em 'docker_exec.PNG'): 
   docker-compose up -d
 
 2- Execute o comando abaixo e verifique se o conatainer 'mongodb_pythondb' foi criado:
