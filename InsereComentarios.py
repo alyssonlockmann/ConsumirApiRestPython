@@ -6,7 +6,7 @@ import json
 from lib import ApiError
 from lib import DbFunctions as db
 import pandas as pd
-from datetime import datetime
+from datetime import datetime,timedelta
 
 # Requisição
 resp = requests.get('http://jsonplaceholder.typicode.com/comments')
@@ -29,7 +29,7 @@ except Exception as inst:
     raise inst
 
 # Adicionado data da consulta.
-df['data'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+df['data'] = datetime.now()
 
 # Renomeando coluna id.
 df = df.rename(columns={'id': 'id_user'})
@@ -51,3 +51,12 @@ df = df.to_dict('records')
 # Inserindo registros na base.
 db.DbFunctions.mongo_insert_many('comentarios', dfCmts)
 db.DbFunctions.mongo_insert_many('posts', df)
+
+# Consultando registros na base.
+mydoc = db.DbFunctions.mongo_find_interval('comentarios','01-04-2021', '02-04-2021')
+for x in mydoc:
+  print(x['_id'])
+  print(x['postId'])
+  print(x['data'])
+  print('.....')
+  

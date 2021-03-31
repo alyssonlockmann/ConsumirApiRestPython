@@ -1,13 +1,20 @@
 
 import pymongo
+from datetime import datetime, timedelta
+from jproperties import Properties
 
 class DbFunctions():
+    # Carregando arquivo de propriedades.
+    __configs = Properties()
+
+    with open('config/app-config.properties', 'rb') as __config_file:
+        __configs.load(__config_file)
     
     # Atributos declarados de forma privada, pois devem ser utilizados apenas dentro da classe.
-    __URLDB = 'localhost:27017'
-    __USER = 'pythonUser'
-    __PASS = 'pythonPass'
-    __DATABASE = 'pythonDb'
+    __URLDB = __configs.get('URLDB').data
+    __USER = __configs.get('USER').data
+    __PASS = __configs.get('PASS').data
+    __DATABASE = __configs.get('DATABASE').data
 
     # Criando e configurando o cliente do mongoDB, também privados.
     __mongoClient = pymongo.MongoClient('mongodb://' + __USER + ':' + __PASS + '@' + __URLDB + '/' + __DATABASE)
@@ -42,3 +49,20 @@ class DbFunctions():
             print('*** Erro ao inserir lote de registros! Coll: ' + collection)
             print(type(inst))
             print(inst.args[0])
+
+    @classmethod
+    def mongo_find_interval(self, collection, date_ini, date_final):
+        '''... '''
+        coll = self.__database[collection]
+
+        date_gte = datetime.strptime(date_ini, '%d-%m-%Y')
+        date_lte = datetime.strptime(date_final, '%d-%m-%Y')
+
+        result = coll.find({ "data": { "$gte": date_gte , "$lte": date_lte}})
+        print(date_gte)
+        print(date_lte)
+        
+        return result
+        
+        
+
