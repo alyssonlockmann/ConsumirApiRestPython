@@ -7,9 +7,16 @@ from lib import ApiError
 from lib import DbFunctions as db
 import pandas as pd
 from datetime import datetime,timedelta
+from jproperties import Properties
+
+# Lendo arquivo de propriedades
+configs = Properties()
+
+with open('config/app-config.properties', 'rb') as config_file:
+        configs.load(config_file)
 
 # Requisição
-resp = requests.get('http://jsonplaceholder.typicode.com/comments')
+resp = requests.get(configs.get('URL_COMENTARIOS').data)
 
 # Testa pra ver se a requisição deu ok.
 # Se deu erro, apresenta a exceção.
@@ -36,13 +43,9 @@ df = df.rename(columns={'id': 'id_user'})
 
 # Cria df de comentários e apresenta resultado. 
 dfCmts = df.drop(['name', 'email'], axis=1)
-print('Comentários a serem inseridos:')
-print(dfCmts.head(n=5))
 
 # Retira a coluna body do df e apresenta resultado.
 df.drop('body', axis=1, inplace=True)
-print('Usuários a serem inseridos:')
-print(df.head(n=5))
 
 # Transforma os dfs para inserir na base.
 dfCmts = dfCmts.to_dict('records')
@@ -51,12 +54,4 @@ df = df.to_dict('records')
 # Inserindo registros na base.
 db.DbFunctions.mongo_insert_many('comentarios', dfCmts)
 db.DbFunctions.mongo_insert_many('posts', df)
-
-# Consultando registros na base.
-mydoc = db.DbFunctions.mongo_find_interval('comentarios','01-04-2021', '02-04-2021')
-for x in mydoc:
-  print(x['_id'])
-  print(x['postId'])
-  print(x['data'])
-  print('.....')
   

@@ -45,6 +45,7 @@ class DbFunctions():
         try:
             coll.insert_many(data)
             print('Lote de registros inserido com successo! Coll: ' + collection)
+            print('Registros no lote: {}'.format(len(data)))
         except Exception as inst:
             print('*** Erro ao inserir lote de registros! Coll: ' + collection)
             print(type(inst))
@@ -52,17 +53,24 @@ class DbFunctions():
 
     @classmethod
     def mongo_find_interval(self, collection, date_ini, date_final):
-        '''... '''
+        '''Busca dados de um período da collection informada.
+        \nOs parâmetros "date_ini" e "date_final" recebe data no formato "dd-mm-yyyy".'''
         coll = self.__database[collection]
-
+        
         date_gte = datetime.strptime(date_ini, '%d-%m-%Y')
         date_lte = datetime.strptime(date_final, '%d-%m-%Y')
 
-        result = coll.find({ "data": { "$gte": date_gte , "$lte": date_lte}})
-        print(date_gte)
-        print(date_lte)
+        try:
+            result = coll.find({ "data": { "$gte": date_gte , "$lte": date_lte}})
+            print('Período consultado: ' + date_ini + ' até ' + date_final)
+            return result
+        except Exception as inst:
+            print('*** Erro ao consultar registros! Coll: ' + collection + ' Periodo: ' + date_ini + ' / ' + date_final)
+            print(type(inst))
+            print(inst.args[0])
+
+
         
-        return result
         
         
 
