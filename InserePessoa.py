@@ -30,7 +30,7 @@ userData = {'nome' : jsonResults[0]['name']['first'] + ' ' + jsonResults[0]['nam
             'idade': jsonResults[0]['registered']['age'],
             'email': jsonResults[0]['email'],
             'pais': jsonResults[0]['location']['country'],
-            'data': datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            'data': datetime.now()
         }
 
 # Inserindo o registro na base. Se deu erro, apresenta a exceção tratada.
